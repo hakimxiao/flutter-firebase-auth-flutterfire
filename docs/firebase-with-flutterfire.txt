@@ -1,0 +1,44 @@
+DOKUMENTASI INSTALASI LAYANAN FIREBASE 
+
+How To Create FirebaseProject with AUTO CLI by flutter fire : 
+    1. tambahkan dulu di project anda paket ini                         : flutter pub add firebase_core
+    2. download flutter fire CLI                                        : dart pub global activate flutterfire_cli
+    3. pindah ke project yang ingin di itegrasikan                      : cd myProject
+    4. Sebelum melakukkan perintah flutterfire configure kita diharuskan daftar dulu dari project yang ingin digunakan agar terintegrasi 
+       dengan firebase dengan cara jalankan perintah login di terminal  : firebase login 
+       Maka anda akan diloginkan ke redirect langsung ke firebase 
+    5. terakhir jalankan                                                : flutterfire configure 
+       anda akan diberikan project yang tersedia di firebase console silahkan pilih 
+       kemudian anda juga akan di mintai beberapa konfigurasi seperti device yang digunakan dll 
+       Dan terakhir dia akan memberikan firebase app id
+    6. Setelah SELESAI semua configure nya ada di lib/firebase_options.dart 
+       Disana license nya.
+    7. Jangan lupa untuk import lib/firebase_options.dart nya didalam MAIN.dart ******
+    
+    #  SELESAI
+        - untuk memastikan buka di project setting firebase console dan di general scroll bawah maka akan tampil
+        - CARA CLI INI AKAN MEMBUAT SEMUA ALL DEVICE ANDROID IOS DLL.
+
+# PENTING SETUP AKHIR
+    - Karena kita sudah menggunakan firebase maka wajib di main nya kita implementasikan hasil dari firebase nya dengan cara
+        void main nya kita rombak sesuai dengan dokumentasi firebase : 
+        ====
+            import 'package:firebase_core/firebase_core.dart';              // dari pub firebase core
+            import 'package:flutter/material.dart';             
+            import 'package:firebase/firebase_options.dart';                // dari hasil setup flutterfire CLI
+
+            // PERUBAHAN KETENTUAN DARI FLUTTER     
+            Future<void> main() async {
+                WidgetsFlutterBinding.ensureInitialized();
+
+                await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+                runApp(const MyApp());
+            }
+        ===
+    
+* Error : 
+    1. uses-sdk:minSdkVersion 21 cannot be smaller than version 23 declared in library [:firebase_core]
+        Q : SOLUSI : 
+            Plugin firebase_core butuh minSdkVersion minimal 23, sedangkan project kamu masih pakai 21.
+            Jadi solusinya adalah menaikkan minSdkVersion di android/app/build.gradle (atau build.gradle.kts kalau pakai Kotlin DSL).
