@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_firebase_app/app/controllers/auth_controller.dart';
+import 'package:my_firebase_app/app/modules/home/views/home_view.dart';
+import 'package:my_firebase_app/app/modules/login/views/login_view.dart';
 import 'package:my_firebase_app/app/utils/loading.dart';
 import 'app/routes/app_pages.dart';
 
@@ -36,8 +38,9 @@ class MyApp extends StatelessWidget {
           print(snapshot.data); // jika null maka user belum login.
           return GetMaterialApp(
             title: "Application",
-            initialRoute: snapshot.data != null ? Routes.HOME : Routes.LOGIN,
+            // initialRoute: snapshot.data != null ? Routes.HOME : Routes.LOGIN,
             getPages: AppPages.routes,
+            home: snapshot.data != null ? HomeView() : LoginView(),
           );
         }
         return LoadingView();

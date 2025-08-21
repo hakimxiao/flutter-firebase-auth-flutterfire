@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:my_firebase_app/app/controllers/auth_controller.dart';
 
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+  LoginView({super.key});
+
+  final emailC = TextEditingController();
+  final passwordC = TextEditingController();
+
+  final authC = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('LoginView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'LoginView is working',
-          style: TextStyle(fontSize: 20),
+      appBar: AppBar(title: const Text('Login Screen'), centerTitle: true),
+      body: Padding(
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          children: [
+            TextField(
+              controller: emailC,
+              decoration: InputDecoration(label: Text('Email')),
+            ),
+            TextField(
+              controller: passwordC,
+              decoration: InputDecoration(label: Text('Password')),
+            ),
+            SizedBox(height: 50),
+            ElevatedButton(
+              onPressed: () => authC.login(emailC.text, passwordC.text),
+              child: Text("LOGIN"),
+            ),
+          ],
         ),
       ),
     );

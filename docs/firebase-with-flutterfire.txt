@@ -42,3 +42,7 @@ How To Create FirebaseProject with AUTO CLI by flutter fire :
         Q : SOLUSI : 
             Plugin firebase_core butuh minSdkVersion minimal 23, sedangkan project kamu masih pakai 21.
             Jadi solusinya adalah menaikkan minSdkVersion di android/app/build.gradle (atau build.gradle.kts kalau pakai Kotlin DSL).
+
+
+AUTHENTICATION : 
+    1. Jangan lupa enable di firebase console google/password agar suport.
