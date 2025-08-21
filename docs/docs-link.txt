@@ -1,0 +1,4 @@
+# signout : 
+    https://firebase.flutter.dev/docs/auth/custom-auth/#next-steps
+# signin by google and password :
+    https://firebase.flutter.dev/docs/auth/password-auth/#sign-in-a-user-with-an-email-address-and-password

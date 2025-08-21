@@ -23,5 +23,7 @@ class AuthController extends GetxController {
     }
   }
 
-  void logout() {}
+  void logout() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }
