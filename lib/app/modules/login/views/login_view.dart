@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:my_firebase_app/app/controllers/auth_controller.dart';
+import 'package:my_firebase_app/app/routes/app_pages.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -32,6 +33,17 @@ class LoginView extends GetView<LoginController> {
             ElevatedButton(
               onPressed: () => authC.login(emailC.text, passwordC.text),
               child: Text("LOGIN"),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Belum punya akun?'),
+                TextButton(
+                  onPressed: () => Get.toNamed(Routes.SIGNUP),
+                  child: Text("SIGNUP"),
+                ),
+              ],
             ),
           ],
         ),

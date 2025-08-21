@@ -38,9 +38,11 @@ class MyApp extends StatelessWidget {
           print(snapshot.data); // jika null maka user belum login.
           return GetMaterialApp(
             title: "Application",
-            // initialRoute: snapshot.data != null ? Routes.HOME : Routes.LOGIN,
+            // ingat jika menggunakan routing, difunction nya wajib kita bereikan Get routing
+            // agar dia berpindah halaman kecuali menggunakan home
+            initialRoute: snapshot.data != null ? Routes.HOME : Routes.LOGIN,
             getPages: AppPages.routes,
-            home: snapshot.data != null ? HomeView() : LoginView(),
+            // home: snapshot.data != null ? HomeView() : LoginView(),
           );
         }
         return LoadingView();
