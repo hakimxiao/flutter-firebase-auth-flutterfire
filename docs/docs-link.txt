@@ -4,3 +4,10 @@
     https://firebase.flutter.dev/docs/auth/password-auth/#sign-in-a-user-with-an-email-address-and-password
 # registration / signup with google and password :
     https://firebase.flutter.dev/docs/auth/usage/#registration
+
+# verifikasi user email :
+    https://firebase.flutter.dev/docs/auth/usage/#verifying-a-users-email
+
+
+Email verification 
+    Handler untuk melakukkan verifikasi email baik format dan keunikan dari sebuah email

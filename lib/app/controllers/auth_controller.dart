@@ -7,24 +7,35 @@ import 'package:my_firebase_app/app/routes/app_pages.dart';
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  // Stream<User?> streamAuthStatus() {
-  //   return auth.authStateChanges();
-  // } *** VERSI KOMPLEKS
-
-  Stream<User?> get streamAuthStatus => auth.authStateChanges(); // VERSI SIMPLE
+  Stream<User?> get streamAuthStatus => auth.authStateChanges();
 
   void signup(String email, String password) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+      UserCredential myUser = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      await myUser.user!.sendEmailVerification();
+      Get.defaultDialog(
+        title: 'Verification Email',
+        middleText: 'Kami telah mengirimkan verifikasi ke $email',
+        onConfirm: () {
+          Get.back(); // close dialog
+          Get.back(); // rounting ke login
+        },
+        textConfirm: 'Oke',
       );
-      Get.offNamed(Routes.HOME);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        Get.defaultDialog(
+          title: 'Terjadi kesalahan',
+          middleText: 'The password provided is too weak.',
+        );
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        Get.defaultDialog(
+          title: 'Terjadi kesalahan',
+          middleText: 'The account already exists for that email.',
+        );
       }
     } catch (e) {
       print(e);
@@ -33,16 +44,44 @@ class AuthController extends GetxController {
 
   void login(String email, String password) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-
-      // wajib dideklarasikan jika pakai routing
-      Get.offNamed(Routes.HOME);
+      UserCredential myUser = await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (myUser.user!.emailVerified) {
+        Get.offNamed(Routes.HOME);
+      } else {
+        Get.defaultDialog(
+          title: 'Verification Email',
+          middleText:
+              'Kamu perlu memverifikasi email terlebih dahulu, apakah kamu mau dikirimkan verifikasi ulang ?',
+          onConfirm: () async {
+            await myUser.user!.sendEmailVerification();
+            Get.back();
+          },
+          textConfirm: 'Kirim Ulang',
+          textCancel: 'Kembali',
+        );
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        Get.defaultDialog(
+          title: 'Terjadi kesalahan',
+          middleText: 'No user found for that email.',
+        );
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        Get.defaultDialog(
+          title: 'Terjadi kesalahan',
+          middleText: 'Wrong password provided for that user.',
+        );
       }
+    } catch (e) {
+      Get.defaultDialog(
+        title: 'Terjadi kesalahan',
+        middleText: 'Tidak dapat login dengan akun ini',
+      );
     }
   }
 
