@@ -9,10 +9,8 @@ import '../controllers/login_controller.dart';
 class LoginView extends GetView<LoginController> {
   LoginView({super.key});
 
-  final emailC = TextEditingController();
-  final passwordC = TextEditingController();
-
   final authC = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +20,28 @@ class LoginView extends GetView<LoginController> {
         child: Column(
           children: [
             TextField(
-              controller: emailC,
+              controller: controller.emailC,
               decoration: InputDecoration(label: Text('Email')),
             ),
             TextField(
-              controller: passwordC,
+              controller: controller.passwordC,
               decoration: InputDecoration(label: Text('Password')),
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () => Get.toNamed(Routes.RESET_PASSWORD),
+                child: Text('Reset Password'),
+              ),
             ),
             SizedBox(height: 50),
             ElevatedButton(
-              onPressed: () => authC.login(emailC.text, passwordC.text),
+              onPressed:
+                  () => authC.login(
+                    controller.emailC.text,
+                    controller.passwordC.text,
+                  ),
               child: Text("LOGIN"),
             ),
             SizedBox(height: 10),

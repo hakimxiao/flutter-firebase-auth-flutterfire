@@ -9,5 +9,3 @@
     https://firebase.flutter.dev/docs/auth/usage/#verifying-a-users-email
 
 
-Email verification 
-    Handler untuk melakukkan verifikasi email baik format dan keunikan dari sebuah email

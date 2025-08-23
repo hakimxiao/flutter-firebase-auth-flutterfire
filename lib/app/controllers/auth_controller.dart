@@ -91,7 +91,36 @@ class AuthController extends GetxController {
 
     Get.offNamed(Routes.LOGIN);
   }
+
+  void resetPassword(String email) {
+    if (email != '' && GetUtils.isEmail(email)) {
+      try {
+        auth.sendPasswordResetEmail(email: email);
+        Get.defaultDialog(
+          title: 'Berhasil',
+          middleText: 'Kami telah mengirimkan reset password ke $email',
+          onConfirm: () {
+            Get.back(); // close dialog
+            Get.back(); // got to login
+          },
+          textConfirm: 'OKE',
+        );
+      } catch (e) {
+        Get.defaultDialog(
+          title: 'Terjadi kesalahan',
+          middleText: 'Tidak dapat mengirimkan reset password',
+        );
+      }
+    } else {
+      Get.defaultDialog(
+        title: 'Terjadi kesalahan',
+        middleText: 'Email tidak valid',
+      );
+    }
+  }
 }
+
+
 
 
 // KENAPA ROUTING ?. KENAPA TIDAK HOME ?

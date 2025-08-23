@@ -1,16 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+class ResetPasswordController extends GetxController {
   TextEditingController emailC = TextEditingController(
     text: '2022110133@students.uigm.ac.id',
   );
-  TextEditingController passwordC = TextEditingController(text: 'test123');
 
   @override
   void onClose() {
     emailC.dispose();
-    passwordC.dispose();
     super.onClose();
   }
 }
