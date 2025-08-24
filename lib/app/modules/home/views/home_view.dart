@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home View'),
+        title: const Text('Home View Barang Di atas 10.000'),
         centerTitle: true,
         actions: [
           IconButton(onPressed: () => authC.logout(), icon: Icon(Icons.logout)),
@@ -81,7 +81,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                   );
                 }
-                return Center(child: Text('Tidak Ada Product di Atas 10.000'));
+                return SizedBox();
               },
             );
           }
