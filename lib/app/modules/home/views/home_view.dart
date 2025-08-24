@@ -22,10 +22,37 @@ class HomeView extends GetView<HomeController> {
           IconButton(onPressed: () => authC.logout(), icon: Icon(Icons.logout)),
         ],
       ),
-      body: FutureBuilder<QuerySnapshot<Object?>>(
-        future: controller.getData(),
+      // =======================================================================
+      // ONETIME GET DATA FROM FIREBASE :
+      // =======================================================================
+      // body: FutureBuilder<QuerySnapshot<Object?>>(
+      //   future: controller.getData(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.done) {
+      //       var listAllDocument = snapshot.data!.docs;
+      //       return ListView.builder(
+      //         itemCount: listAllDocument.length,
+      //         itemBuilder:
+      //             (context, index) => ListTile(
+      //               title: Text(
+      //                 'Nama product: ${(listAllDocument[index].data() as Map<String, dynamic>)["name"]}',
+      //               ),
+      //               subtitle: Text(
+      //                 'Harga product: ${(listAllDocument[index].data() as Map<String, dynamic>)["price"]}',
+      //               ),
+      //             ),
+      //       );
+      //     }
+      //     return Center(child: CircularProgressIndicator());
+      //   },
+      // ),
+      // =======================================================================
+      // REALTIME GET DATA FROM FIREBASE :
+      // =======================================================================
+      body: StreamBuilder<QuerySnapshot<Object?>>(
+        stream: controller.streamData(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.connectionState == ConnectionState.active) {
             var listAllDocument = snapshot.data!.docs;
             return ListView.builder(
               itemCount: listAllDocument.length,
