@@ -1,0 +1,13 @@
+* DOCS : 
+    - general       : https://firebase.google.com/docs/firestore/quickstart
+    - flutterfire   : https://firebase.flutter.dev/docs/firestore/usage
+
+LANGKAH LANGKAH 
+    A. SETUP DATABASE : 
+        1.   Buat dahulu project di web firebase.console yaitu di bagian build pada nav menu sebelah kiri 
+            Yaitu FIRESTORE DATABASE   
+    
+CRUD : 
+    Tambah data (Create) : 
+        https://firebase.flutter.dev/docs/firestore/usage#adding-documents
+    
