@@ -14,7 +14,8 @@ class AddProductController extends GetxController {
     ); // refer ke collection products
 
     try {
-      await products.add({'name': name, 'price': price});
+      String dateNow = DateTime.now().toString();
+      await products.add({'name': name, 'price': price, "time": dateNow});
       Get.defaultDialog(
         title: 'Berhasil',
         middleText: 'Berhasil menambahkan product $name',

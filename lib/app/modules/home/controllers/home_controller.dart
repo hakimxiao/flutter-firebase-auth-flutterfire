@@ -20,7 +20,7 @@ class HomeController extends GetxController {
 
   Stream<QuerySnapshot<Object?>> streamData() {
     CollectionReference products = firestore.collection('products');
-    return products.snapshots();
+    return products.orderBy('time', descending: true).snapshots();
   }
 
   void deleteProduct(String docId) async {
