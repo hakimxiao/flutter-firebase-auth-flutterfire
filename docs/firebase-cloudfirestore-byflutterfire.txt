@@ -10,4 +10,8 @@ LANGKAH LANGKAH
 CRUD : 
     Tambah data (Create) : 
         https://firebase.flutter.dev/docs/firestore/usage#adding-documents
-    
+
+    Baca Data (Read) : 
+CRUD BY FIRESTORE DB WITH FLUTTER FIRE (STEP 1 = Create) : 
+1). Create / Buat Data
+--- Disini kita membuat UI baik handler untuk pembuatan data ke firebase berdasarkan textEditor

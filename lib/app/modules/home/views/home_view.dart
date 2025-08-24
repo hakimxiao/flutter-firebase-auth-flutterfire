@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -21,11 +22,26 @@ class HomeView extends GetView<HomeController> {
           IconButton(onPressed: () => authC.logout(), icon: Icon(Icons.logout)),
         ],
       ),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder:
-            (context, index) =>
-                ListTile(title: Text('Nama product'), subtitle: Text('status')),
+      body: FutureBuilder<QuerySnapshot<Object?>>(
+        future: controller.getData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            var listAllDocument = snapshot.data!.docs;
+            return ListView.builder(
+              itemCount: listAllDocument.length,
+              itemBuilder:
+                  (context, index) => ListTile(
+                    title: Text(
+                      'Nama product: ${(listAllDocument[index].data() as Map<String, dynamic>)["name"]}',
+                    ),
+                    subtitle: Text(
+                      'Harga product: ${(listAllDocument[index].data() as Map<String, dynamic>)["price"]}',
+                    ),
+                  ),
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
