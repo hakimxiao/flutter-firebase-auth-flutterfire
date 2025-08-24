@@ -56,8 +56,11 @@ class HomeView extends GetView<HomeController> {
             var listAllDocument = snapshot.data!.docs;
             return ListView.builder(
               itemCount: listAllDocument.length,
-              itemBuilder:
-                  (context, index) => ListTile(
+              itemBuilder: (context, index) {
+                if ((listAllDocument[index].data()
+                        as Map<String, dynamic>)["price"] >=
+                    10000) {
+                  return ListTile(
                     onTap:
                         () => Get.toNamed(
                           Routes.EDIT_PRODUCT,
@@ -76,7 +79,10 @@ class HomeView extends GetView<HomeController> {
                           ),
                       icon: Icon(Icons.delete),
                     ),
-                  ),
+                  );
+                }
+                return Center(child: Text('Tidak Ada Product di Atas 10.000'));
+              },
             );
           }
           return Center(child: CircularProgressIndicator());
