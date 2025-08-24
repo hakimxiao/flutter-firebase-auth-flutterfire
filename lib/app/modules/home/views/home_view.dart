@@ -58,6 +58,11 @@ class HomeView extends GetView<HomeController> {
               itemCount: listAllDocument.length,
               itemBuilder:
                   (context, index) => ListTile(
+                    onTap:
+                        () => Get.toNamed(
+                          Routes.EDIT_PRODUCT,
+                          arguments: listAllDocument[index].id,
+                        ),
                     title: Text(
                       'Nama product: ${(listAllDocument[index].data() as Map<String, dynamic>)["name"]}',
                     ),
