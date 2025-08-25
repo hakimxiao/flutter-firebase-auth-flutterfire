@@ -8,4 +8,6 @@
 # verifikasi user email :
     https://firebase.flutter.dev/docs/auth/usage/#verifying-a-users-email
 
+# Query Data Firebase : 
+    https://firebase.flutter.dev/docs/firestore/usage#querying
 

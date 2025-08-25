@@ -20,6 +20,10 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
         actions: [
           IconButton(onPressed: () => authC.logout(), icon: Icon(Icons.logout)),
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.QUERY),
+            icon: Icon(Icons.query_stats),
+          ),
         ],
       ),
       // =======================================================================
