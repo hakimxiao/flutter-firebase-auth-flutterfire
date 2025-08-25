@@ -9,19 +9,18 @@ class QueryController extends GetxController {
   // @_Filter adalah operasi yang digunakan utnuk perbandingan,
   //  where, isEqualTo, isGreaterThan, isGreaterThanOrEqualTo, isLessThan, isLessThanOrEqualTo ...
   void filter(int age) async {
+    // @_Error Soliutions :  jika kita memiliki query yang duplikasi maka di firebase console nya
+    //  kita wajib membuat index dahulu. agar tidak terjadi overriding.
+    //  klik aja link yang error maka akan di buatkan index oleh firebase
     final result =
         await firestore
             .collection('users')
-            // .where('age', isEqualTo: age.toString())
-            .where(
-              'motor',
-              whereIn: [
-                ['kawasaki', 'honda'],
-                ['yamaha', 'kawasaki'],
-              ],
-            )
-            // .where('motor', arrayContains: 'yamaha')
-            // .where('motor', arrayContainsAny: ['yamaha', 'honda', 'beat'])
+            .where('age', isLessThan: '30')
+            .orderBy('age')
+            // .orderBy('name', descending: true)
+            .limitToLast(
+              2,
+            ) // 2 data paling terakhir (limitToLast) *Dia butuh orderBy setidaknya 1
             .get();
 
     if (result.docs.isNotEmpty) {
